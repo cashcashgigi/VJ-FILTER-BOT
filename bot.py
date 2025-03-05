@@ -1,13 +1,13 @@
-# Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
+# Ne supprimez pas le crédit @VJ_Botz
+# Abonnez-vous à la chaîne YouTube pour des bots incroyables @Tech_VJ
+# Posez vos questions sur Telegram @KingVJ01
 
-# Clone Code Credit : YT - @Tech_VJ / TG - @VJ_Bots / GitHub - @VJBots
+# Crédit du code cloné : YT - @Tech_VJ / TG - @VJ_Bots / GitHub - @VJBots
 
 import sys, glob, importlib, logging, logging.config, pytz, asyncio
 from pathlib import Path
 
-# Get logging configurations
+# Charger la configuration du journal (logs)
 logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
@@ -36,7 +36,7 @@ loop = asyncio.get_event_loop()
 
 async def start():
     print('\n')
-    print('Initalizing Your Bot')
+    print('Initialisation de votre bot')
     bot_info = await TechVJBot.get_me()
     await initialize_clients()
     for name in files:
@@ -49,7 +49,7 @@ async def start():
             load = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(load)
             sys.modules["plugins." + plugin_name] = load
-            print("Tech VJ Imported => " + plugin_name)
+            print("Tech VJ Importé => " + plugin_name)
     if ON_HEROKU:
         asyncio.create_task(ping_server())
     b_users, b_chats = await db.get_banned()
@@ -68,22 +68,22 @@ async def start():
     try:
         await TechVJBot.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(today, time))
     except:
-        print("Make Your Bot Admin In Log Channel With Full Rights")
+        print("Assurez-vous que votre bot est administrateur dans le canal de logs avec tous les droits")
     for ch in CHANNELS:
         try:
-            k = await TechVJBot.send_message(chat_id=ch, text="**Bot Restarted**")
+            k = await TechVJBot.send_message(chat_id=ch, text="**Bot redémarré**")
             await k.delete()
         except:
-            print("Make Your Bot Admin In File Channels With Full Rights")
+            print("Assurez-vous que votre bot est administrateur dans les canaux de fichiers avec tous les droits")
     try:
-        k = await TechVJBot.send_message(chat_id=AUTH_CHANNEL, text="**Bot Restarted**")
+        k = await TechVJBot.send_message(chat_id=AUTH_CHANNEL, text="**Bot redémarré**")
         await k.delete()
     except:
-        print("Make Your Bot Admin In Force Subscribe Channel With Full Rights")
+        print("Assurez-vous que votre bot est administrateur dans le canal d'abonnement forcé avec tous les droits")
     if CLONE_MODE == True:
-        print("Restarting All Clone Bots.......")
+        print("Redémarrage de tous les bots clonés.......")
         await restart_bots()
-        print("Restarted All Clone Bots.")
+        print("Tous les bots clonés ont été redémarrés.")
     app = web.AppRunner(await web_server())
     await app.setup()
     bind_address = "0.0.0.0"
@@ -95,5 +95,4 @@ if __name__ == '__main__':
     try:
         loop.run_until_complete(start())
     except KeyboardInterrupt:
-        logging.info('Service Stopped Bye 👋')
-
+        logging.info('Service arrêté. À bientôt 👋')
